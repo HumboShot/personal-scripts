@@ -41,7 +41,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "foreach ($line in $lines) {" ^
   "  $parts = $line -split ',', 2;" ^
   "  $seconds = [double]($parts[0]);" ^
-    "  $title = if ($parts.Count -gt 1 -and $parts[1].Trim().Length -gt 0) { $parts[1].Trim().Trim([char]34) } else { 'Chapter ' + $index };" ^
+    "  $title = if ($seconds -eq 0) { 'Start of stream' } elseif ($parts.Count -gt 1 -and $parts[1].Trim().Length -gt 0) { $parts[1].Trim().Trim([char]34) } else { 'Chapter ' + $index };" ^
   "  $ts = [TimeSpan]::FromSeconds([math]::Floor($seconds));" ^
   "  if ($ts.Hours -gt 0) { $stamp = ('{0}:{1:00}:{2:00}' -f $ts.Hours, $ts.Minutes, $ts.Seconds) } else { $stamp = ('{0}:{1:00}' -f $ts.Minutes, $ts.Seconds) }" ^
   "  $out += ($stamp + ' ' + $title);" ^
